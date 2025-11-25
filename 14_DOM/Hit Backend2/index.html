@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="p" type="text" placeholder="principle"><br><br>
+    <input id="r" type="text" placeholder="rate"><br><br>
+    <input id="t" type="text" placeholder="time"><br><br>
+    <div id="i"></div>
+
+
+
+    <script>
+        async function populatedDiv() {
+           const p = document.getElementById("p").value
+           const r = document.getElementById("r").value
+           const t = document.getElementById("t").value
+
+           const response = await fetch("http://localhost:3000/interest/?principle="+ p+ "rate="+r+ "time="+t)
+           const ans = await response.text()
+            document.getElementById("i").innerHTML = ans
+        }
+    </script>
+</body>
+</html>
