@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+         <input id="title" type="text" placeholder="Title"> <br><br>
+        <input id="description" type="text" placeholder="Description"> <br><br>
+        <button onclick="addTodo()">Add todo</button><br><br>
+    </div>
+
+    <div id="container"></div>
+   
+
+
+
+
+    <script>
+
+        let globalId = 1
+
+        function markAsDone(id){
+            const wrapperDiv = document.getElementById(id)
+            wrapperDiv.children[2].innerHTML = "Done!"
+        }
+
+
+        function createChild(title, description, id){
+            const child = document.createElement("div")
+
+            const firstGrandChild = document.createElement("div")
+            firstGrandChild.innerHTML = title
+            child.appendChild(firstGrandChild)
+
+            const secondGrandChild = document.createElement("div")
+            secondGrandChild.innerHTML = description
+            child.appendChild(secondGrandChild)
+
+            const thirdGrandChild = document.createElement("button")
+            thirdGrandChild.innerHTML = "Mark as Done!"
+            child.appendChild(thirdGrandChild)
+            
+            child.setAttribute("id", id); 
+
+            thirdGrandChild.setAttribute("onclick", `markAsDone(${id})`)
+
+            return child
+        }
+
+        function addTodo(){
+            let title = document.getElementById("title").value
+            let description = document.getElementById("description").value
+            let parent = document.getElementById("container")
+
+            parent.appendChild(createChild(title, description, globalId++))
+        }
+        
+
+
+        
+       /*
+       Problem statement is that ki we have to create a todo that gives what we wrote in 2 boxes(input fields) and a button of 
+       mark as done, as we again click on mark as done then the button should change it text to Done
+        (Create a simple Todo list where the user can add tasks with a title and description, and mark each task as done.)
+
+        What we have currently in HTML? i.e. 2 inputs fields as title and description and a button of submission
+        Jaise hi we hit submit button then uske niche ek todo ka field khulna chahiye aur usme jo humne title me diya tha 
+        and description me diya tha hona chahiye
+
+        kaise kare ? Simple!
+        Kahaa add krna hai ? niche to ek div banalo html me empty div usko ek id dedo ye tumhaara parent hogye eb sab kuch
+        iske andar hi add krna hai
+
+        kya kya krna hai?
+        title ka data, description ka data and button
+        Matlab child append krna pdega parent div me
+        to ek func banao createChild ka usko call karao jaha append krna hai wahaa
+        
+        How the createChild fn looks like?
+        sabse pehle ek child banega jo niche waale 3 ele ka parent hoga
+        title ka data ke liye ==>  ek div jiske inner html me title ka content hoga usko append krdo uske parent me(child variable)
+        same for description and mark As done button
+        
+        Jo child variable hai yaani inn 3 no kaa parent usko id=1 et karo q niche smjh aayega
+        mark as done pe click huva matlab kaam pura hogya to uss button ka naame change krke done! rakhdo
+        To iske liye ek fn banana pdega ki jaise hi ispe click huva bhai to jo parent hai apnaa id=1 ke saath uske 2 children ka 
+        innerHTML change krke Done! rakhdo
+        
+        id yahaa isliye carry kr rhe hai q ki hume nahi pataa ki humaara jo original button hai submit ka usko hum itni baar 
+        submit submit krenge, jitni baar submit kroge utni baar new todo create hona chahiye
+        1 baar hogya id=1 thi
+        2nd baar id=2 hogi jitni baar chaahe utni baar todo ko create kr skte hai submit button hit krke(original wala)
+        id q use kr rhe hai => Multiple todos, Which button belongs to which todo
+        globalId har todo ko unique id deta hai: 1, 2, 3…
+        Button click me hum markAsDone(id) call karte hain.
+        Function ke andar document.getElementById(id) se exact parent div mil jata hai.
+       */ 
+    </script>
+</body>
+</html>
