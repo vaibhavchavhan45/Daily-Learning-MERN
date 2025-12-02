@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <button id="btn" onclick="Click()">Counter 1</button>
+    
+
+
+    <script>
+        function Click(){
+            const btn = document.getElementById("btn").innerHTML
+            const currCounter = btn.split(" ")[1]
+            console.log(btn.split(" "));
+            const newCounter = parseInt(currCounter) + 1 
+            document.getElementById("btn").innerHTML = "Counter " +newCounter
+        }
+        //Making the dynamic website, which changes its content in realTime
+        //Basically, making an button like Counter 1 but the value of 1 should not be constant should be increment by 1 as we hit that button
+
+    </script>
+</body>
+</html>

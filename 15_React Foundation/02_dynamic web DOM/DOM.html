@@ -1,0 +1,65 @@
+<!-- It is just a same functionality we are trying to create which we did in prev file index.js using Document
+here also we are doing the things in DOM but in react way
+i.e. How under the hood react uses DOM -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="parent"></div>
+
+
+
+    <script>
+        let state = {
+            count : 1
+        }
+
+        function onButtonClick(){
+            state.count++
+            buttonComponentReRender()
+        }
+
+        function buttonComponentReRender() {
+            const parent = document.getElementById("parent")
+            parent.innerHTML = ""
+            const component = CreateComponent(state.count)
+            parent.appendChild(component)
+        }
+
+        function CreateComponent(count){
+            const btn = document.createElement("button")
+            btn.innerHTML = `Counter ${count}`
+            btn.setAttribute("onclick", "onButtonClick()")
+            return btn
+        } 
+
+        buttonComponentReRender()
+
+        //React mainly consist of state(those things on the website are dynamic means changes to the new value
+        // Let say we click a button and its value changes to something else called state)
+        // component(the things that we see on the webpage like icon, btn etc), 
+        // and rendering of the components on the webpage(put on the webpage)
+        //So, here using DOM how can we do that?
+        //we have to create a simple btn whose value is "Counter 1" initially but the no. increments with 1 as we hit that btn
+        //So here state is that number which changes as we hit the button
+        //As we hit the btn what needs render on the screen "Counter 2" So, in react style we called it re rendering
+        //Whoat needs to be re rendered?  The Counter String and the value from 1 to 2
+        //For that we created a component is basically a btn with new value Counter 2
+        //As the fn buttonComponentReRender() calls the createComponent() with new uppdated value of state 
+        //re rendering of button happens
+        // Make sure in re rendering clear everything from the parent div and re render it
+        //Initially we re render a button with Counter 1 thatswhy we are calling buttonComponentReRender() globally
+
+        // the only small tweak you could add for clarity:
+        // React doesn’t clear the DOM entirely like you did with innerHTML = ""; it updates only the part that changed 
+        // (via reconciliation and Virtual DOM).
+        //But it is difficult to do it using DOM thatswhy we cleared the parent element completely and then
+        //rendered the element(button) on the webpage
+    </script> 
+</body>
+</html>
