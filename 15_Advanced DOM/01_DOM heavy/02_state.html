@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="title" type="text" placeholder="Title">
+    <br><br>
+    <input id="description" type="text" placeholder="Description">
+    <br><br>
+    <div id="container"></div>
+    <br><br>
+
+
+
+    <script>
+        function createChild(title, description, id){
+           const child = document.createElement("div")
+
+           const firstChild = document.createElement("div")
+           firstChild.innerHTML = title
+           child.appendChild(firstChild)
+
+           const secondChild = document.createElement("div")
+           secondChild.innerHTML = description
+           child.appendChild(secondChild)
+
+           const thirdChild = document.createElement("button")
+           thirdChild.innerHTML = "Mark as Done"
+           child.appendChild(thirdChild)
+
+            child.setAttribute("id", id)
+
+            return child
+        }
+
+        function updateDOMaccToState(state){
+            const parent = document.getElementById("container")
+            parent.innerHTML = ""
+            for(let i=0; i<state.length; i++){
+                const child = createChild(state[i].title, state[i].description, state[i].id)
+                parent.appendChild(child)
+            }
+        }
+
+        updateDOMaccToState([
+            {
+                title : "Go to gym",
+                description : "Timing allowed from 5-7",
+                id : 1
+            },
+
+            {
+                title : "2 hrs Study",
+                description : "Timing alloted from 8-10",
+                id : 2
+            }
+        ])
+
+
+
+        /*
+        When we have a state (an array of objects) in JS and want to show it on the page, the idea is simple: first, clear the parent container so old stuff disappears. Then, for each object in the state, create a <div> (or whatever element you want) and put the object’s info inside it — like title, description, maybe a button. Give it an id if you want to track it later. Finally, append it to the parent container. Whenever the state changes, just run this again: the parent is cleared, new elements are created, and the page always shows the current state. Basically, your HTML becomes a mirror of your state — whatever is in the state, that’s what you see on the page.
+
+            one line summary is that ki whatever we get in state as input render it on webpage
+            Doesnt mttr ki what previously present there, erase the prev things and render the contents of cuurent state
+
+
+        why we r doing this thing?
+        Why cant we put the data directly in HTML tag
+        In real world websites you dont know ki whatever data is coming from the server and u have to render it on webpage 
+        For that purpose we r doing this thing.
+        */
+
+    </script>
+</body>
+</html>
